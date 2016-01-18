@@ -1,10 +1,8 @@
 # ADB makefile
 # ------------
 
-#TODO change TOOLCHAIN variable to your toolchain path 
-TOOLCHAIN= /opt/poky/1.5/sysroots/x86_64-pokysdk-linux/usr/bin/arm-poky-linux-gnueabi/arm-poky-linux-gnueabi-
-CC= $(TOOLCHAIN)gcc
-LD= $(TOOLCHAIN)gcc
+CC= gcc
+LD= $(CC)
 CXX=$(CC)
 
 
@@ -25,7 +23,7 @@ SRCS+= usb_vendors.c
 SRCS+= adb_auth_host.c
  
 VPATH+= ../libcutils
-SRCS+= list.c
+SRCS+= list.h
 SRCS+= socket_inaddr_any_server.c
 SRCS+= socket_local_client.c
 SRCS+= socket_local_server.c
@@ -58,6 +56,7 @@ CPPFLAGS+= -DHAVE_TERMIO_H
 CPPFLAGS+= -DHAVE_SYS_SOCKET_H
 CPPFLAGS+= -D_GNU_SOURCE
 CPPFLAGS+= -D_XOPEN_SOURCE
+CPPFLAGS+= -D_FILE_OFFSET_BITS=64
 CPPFLAGS+= -std=c++11 
 CPPFLAGS+= -I.
 CPPFLAGS+= -I../include
